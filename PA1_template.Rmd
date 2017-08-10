@@ -59,7 +59,7 @@ Next step draw the histograph.
 
 ```{r hist_steps,echo = TRUE}
 
-qplot(x = totalSteps , binwidth=1000 , xlab="total number of steps", main ="total number of steps taken each day" )
+qplot(x = totalSteps ,  xlab="total number of steps", main ="total number of steps taken each day" )
 
 ```
 

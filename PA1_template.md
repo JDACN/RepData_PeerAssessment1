@@ -56,7 +56,11 @@ Next step draw the histograph.
 
 
 ```r
-qplot(x = totalSteps , binwidth=1000 , xlab="total number of steps", main ="total number of steps taken each day" )
+qplot(x = totalSteps ,  xlab="total number of steps", main ="total number of steps taken each day" )
+```
+
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
 ![](PA1_template_files/figure-html/hist_steps-1.png)<!-- -->
