@@ -12,7 +12,7 @@ output:
 
 First load libraries, 
 
-```{r load_lib, echo = TRUE}
+```{r load_lib, echo = TRUE ,results='asis'}
 
 library(ggplot2)
 
