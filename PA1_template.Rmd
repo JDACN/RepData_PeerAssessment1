@@ -12,7 +12,7 @@ output:
 
 First load libraries, 
 
-```{r load_lib, results='hide'}
+```{r load_lib, echo = TRUE}
 
 library(ggplot2)
 
@@ -57,7 +57,7 @@ totalSteps <- tapply(X = baseData$steps,INDEX = baseData$date,FUN = sum , na.rm 
 Next step draw the histograph.
 
 
-```{r hist_steps}
+```{r hist_steps,echo = TRUE}
 
 qplot(x = totalSteps , binwidth=1000 , xlab="total number of steps", main ="total number of steps taken each day" )
 
@@ -67,7 +67,7 @@ qplot(x = totalSteps , binwidth=1000 , xlab="total number of steps", main ="tota
 
 Lets save the value in variable and produce output with variable
 
-```{r mean_median}
+```{r mean_median,echo = TRUE}
 # Calculate Mean
 stepsByDayMean <- mean(totalSteps )
 
@@ -85,7 +85,7 @@ The **mean** is `r stepsByDayMean` and **median** is `r stepsByDayMedian`
 
 - First create the data frame with summarized  dates and steps
 
-```{r summarize}
+```{r summarize,echo = TRUE}
 nonNASubset <- baseData[complete.cases(baseData),]
 MeanDataByInterval <- aggregate(nonNASubset$steps, by=list(nonNASubset$interval), mean)
 # set the column names
@@ -95,7 +95,7 @@ names(MeanDataByInterval)<- c("interval","steps")
  
 ```
 - Next we plot the average daily steps against the intervals:
-```{r draw_chart_avgdailysteps}
+```{r draw_chart_avgdailysteps,echo = TRUE}
 
 ggplot(MeanDataByInterval, aes(x = interval, y=steps)) +
   labs(title = "Sum of Steps by Interval", x = "interval", y = "steps")+
@@ -106,7 +106,7 @@ ggplot(MeanDataByInterval, aes(x = interval, y=steps)) +
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
-```{r mean}
+```{r mean,echo = TRUE}
 MeanDataByInterval[which.max(MeanDataByInterval$steps),]
 ```
 
@@ -114,7 +114,7 @@ MeanDataByInterval[which.max(MeanDataByInterval$steps),]
 
 1. Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs)
 
-```{r totalNA}
+```{r totalNA,echo = TRUE}
 
 sum(is.na(baseData))
 
@@ -122,7 +122,7 @@ sum(is.na(baseData))
 
  2. Devise a strategy for filling in all of the missing values in the dataset.
 
-```{r build_stratagy}
+```{r build_stratagy,echo = TRUE}
 
 #Lets Fill all the steps by minimum steps (not zero) 
 
@@ -133,7 +133,7 @@ min_steps <- min(baseData$steps[baseData$steps != 0],na.rm =  TRUE)
 
 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
-```{r newdataset}
+```{r newdataset,echo = TRUE}
 
 #Create New dataset 
 
@@ -150,7 +150,7 @@ tail(newData)
 4.Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. 
 
 - First create aggrgated table with steps
-```{r newtableforsteps}
+```{r newtableforsteps,echo = TRUE}
 
 noStepsByDay <- aggregate(newData$steps, by=list(newData$date), sum)
 
@@ -164,7 +164,7 @@ head(noStepsByDay,n = 10)
 
 - draw the graph
 
-```{r draw_graph_steps}
+```{r draw_graph_steps,echo = TRUE}
 
 ggplot(noStepsByDay, aes(x = totalsteps)) +
   geom_histogram(fill = "skyblue",binwidth=2000, position="dodge") +
@@ -175,7 +175,7 @@ ggplot(noStepsByDay, aes(x = totalsteps)) +
 ## Are there differences in activity patterns between weekdays and weekends?
 1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
-```{r}
+```{r weekday_calc,echo = TRUE}
 # Get which day of week first and append to new column
 newData$weekday <- weekdays(as.Date( newData$date))
 
@@ -188,7 +188,7 @@ newData$weekend <- ifelse (newData$weekday == "Saturday" | newData$weekday == "S
 
 2. Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 
-```{r}
+```{r finalchart,echo = TRUE}
 # Aggregate data based on day and interval
 WeekendWeekday <- aggregate(newData$steps, by=list(newData$weekend, newData$interval), mean)
 names(WeekendWeekday ) <- c("day","interval","steps")

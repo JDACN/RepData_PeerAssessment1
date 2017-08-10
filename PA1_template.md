@@ -227,5 +227,5 @@ ggplot(WeekendWeekday, aes(x = interval, y=steps, color=day)) +
   labs(title = "Mean of Steps by Interval", x = "interval", y = "steps")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](PA1_template_files/figure-html/finalchart-1.png)<!-- -->
 
