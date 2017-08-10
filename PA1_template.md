@@ -1,9 +1,4 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 
@@ -12,75 +7,70 @@ output:
 
 First load graphics libraries, 
 
-```{r load_lib,echo = TRUE }
 
+```r
 # load graphics library
 library(ggplot2)
-
 ```
 
 Unzip data  and read it in data.frame
 
-```{r load_data,echo = TRUE }
+
+```r
 # Unzip archive
 unzip("activity.zip")
 
 # Read base data into a data frame.
 baseData <- read.csv("activity.csv")
-
 ```
 
 Check the structure of baseData.
 
-```{r check_data,echo = TRUE }
 
+```r
 str(baseData)
+```
 
+```
+## 'data.frame':	17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Factor w/ 61 levels "2012-10-01","2012-10-02",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
 ```
 
 
 ## What is mean total number of steps taken per day?
 
-1. Calculate the total number of steps taken per day
 To calculate mean of total number of steps taken per day, first aggregate steps based on dates .
 
-```{r find_mean,echo = TRUE }
 
+```r
 # Aggregate the number of steps (excluding number of steps)
 
 totalSteps <- tapply(X = baseData$steps,INDEX = baseData$date,FUN = sum , na.rm =TRUE )
-
-
 ```
 
-2. Make a histogram of the total number of steps taken each day
 Next step draw the histograph.
 
 
-```{r hist_steps}
 
+```r
 qplot(x = totalSteps , binwidth=1000 , xlab="total number of steps", main ="total number of steps taken each day" )
-
 ```
 
-3. Calculate and report the mean and median of the total number of steps taken per day.
+![](PA1_template_files/figure-html/hist_steps-1.png)<!-- -->
 
-Lets save the value in variable and produce output with variable
+Calculate and report the mean and median of the total number of steps taken per day.
 
-```{r mean_median}
-# Calculate Mean
+
+```r
 stepsByDayMean <- mean(totalSteps )
-
-# Calculate Median
 stepsByDayMedian <- median(totalSteps )
-
 ```
 
-The **mean** is `r stepsByDayMean` and **median** is `r stepsByDayMedian`
+The *mean* is 9354.2295082 and *median* is 10395
 
 ## What is the average daily activity pattern?
-
-
 
 
 
